@@ -55,7 +55,7 @@ class DysderaCrawler:
                 return
             except aiohttp.ClientConnectionError:
                 return
-        if policy.should_visit(page, sitemap=sitemap):
+        if await policy.should_visit(page, sitemap=sitemap):
             new = False
             if page.url.domain not in self.domains_queues:
                 new = True
@@ -221,7 +221,7 @@ class DysderaCrawler:
                         else:
                             self.logger.info_output(f"Canonical url {can_url()} already visited", duty, at=target.url)
                 await savepage
-                if policy.should_crawl(target):
+                if await policy.should_crawl(target):
                     self.logger.info_output("Valid page, searching links", duty, at=target.url)
                     for elem in target.extract_links():
                         if (not self.visited.contains_url(elem) and
