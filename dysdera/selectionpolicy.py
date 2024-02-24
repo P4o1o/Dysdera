@@ -45,7 +45,6 @@ class AgedSelectionPolicy:
                 visited_max = 0
                 latestmod = 0
                 changes = 0
-                now = absolute_timestamp(datetime.now())
                 prec_last_mod = None
                 for doc in cursor:
                     lastmod = doc["lastmod"]
