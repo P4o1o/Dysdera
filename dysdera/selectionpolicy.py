@@ -67,9 +67,6 @@ class AgedSelectionPolicy:
                 t = visited_max - latestmod
                 lambd = changes/known_for
                 age = (t + lambd * math.exp(-lambd * t) - 1) / lambd
-                print()
-                print(age)
-                print()
                 return age > self.max_age
 
             except StopAsyncIteration:
