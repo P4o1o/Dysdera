@@ -1,30 +1,35 @@
 # Dysdera Web Crawler
-this is a simple asynchronous web crawler implementation.
+### this is a simple asynchronous web crawler implementation.
 
-it uses:
-
-  MongoDB for saving data
+#### it uses:
+ 
+  MongoDB for saving data (or in alternative a Json file for testing)
   
-and some python packages:
+#### and some python packages:
+  
+  * motor to interact with MongoDB,
+  * json and aiofiles for saving in Json file
+  * asyncio for the asynchronous logic,
+  * aiohttp for http managing,
+  * lxml for the html parsing,
+  * brotli for http response compression,
+  * pytz and python-dateutil for more precise datetime management,
+  * chardet for encodin detection
+#
 
-  motor to intercact with MongoDB,
-  asyncio for the asynchronous logic,
-  aiohttp for http managing,
-  lxml for the html parsing,
-  brotli for http response compression,
-  pytz and python-dateutil for more precise datetime management,
-  chardet for encodin detection
 
-in dysdera.py there's the logic of the crawler, 
+#### files structure:
 
-in extractors.py the logic of the extractors, 
++ dysdera.py contains the logic of the crawler, 
 
-in policy.py is defined the structure of the crawler policy, 
++ extractors.py contains the logic of the extractors, 
 
-in selectionpolicy.py some selection policy
++ policy.py contains the structure of the crawler policy, 
 
-in web.py the logic for manage webpages and more, 
++ selectionpolicy.py some selection policy
 
-in parser.py the needed parser 
++ web.py the logic for manage webpages and more, 
 
-and in logger.py the logic for the logs
++ parser.py the necessary parser 
+
++ logger.py the logic for the logs
