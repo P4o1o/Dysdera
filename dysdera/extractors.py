@@ -9,6 +9,7 @@ from dysdera.parser import absolute_timestamp
 from dysdera.web import WebTarget
 from motor.motor_asyncio import AsyncIOMotorCollection
 from aiofiles import open as aio_open
+from aiofiles import AiofilesContextManager
 import json
 
 
