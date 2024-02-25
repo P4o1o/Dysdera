@@ -49,8 +49,6 @@ class AgedSelectionPolicy:
                 for doc in cursor:
                     lastmod = doc["lastmod"]
                     visited = doc["visited"]
-                    if lastmod is None:
-                        return self.not_present
                     lastv = absolute_timestamp(visited)
                     lastm = absolute_timestamp(lastmod)
                     if prec_last_mod is not None and prec_last_mod != lastm:
