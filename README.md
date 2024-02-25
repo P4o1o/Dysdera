@@ -20,7 +20,7 @@
 
 #### files structure:
 
-+ dysdera.py contains the logic of the crawler, 
++ dysderacrawler.py contains the logic of the crawler, 
 
 + extractors.py contains the logic of the extractors, 
 
