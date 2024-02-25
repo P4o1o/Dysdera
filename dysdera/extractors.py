@@ -9,25 +9,14 @@ from dysdera.parser import absolute_timestamp
 from dysdera.web import WebTarget
 from motor.motor_asyncio import AsyncIOMotorCollection
 from aiofiles import open as aio_open
+import json
 
 
 class DysderaExtractor(ABC):
     """
     abstract class for the informarion extractor
     """
-
-    @abstractmethod
-    async def extract(self, x: WebTarget): # in this class shuold be defined the logic of the page saving
-        pass
-
-
-class MongoExtractor(DysderaExtractor): # extractors that saves crawl information in a mongodb collection
-
-    def __init__(self, collection: AsyncIOMotorCollection,
-                 save_if: Callable[[dict], bool] = lambda x: True):
-        self.save_if = save_if
-        self.collection = collection
-
+    
     @staticmethod
     def page_to_dict(x: WebTarget) -> dict:
         titoli = ""
@@ -56,6 +45,18 @@ class MongoExtractor(DysderaExtractor): # extractors that saves crawl informatio
                 'lastmod': x.last_modify,
                 'timestamp_UTC': absolute_timestamp(x.last_modify) if x.last_modify is not None else None}
 
+    @abstractmethod
+    async def extract(self, x: WebTarget): # in this class shuold be defined the logic of the page saving
+        pass
+
+
+class MongoExtractor(DysderaExtractor): # extractors that saves crawl information in a mongodb collection
+
+    def __init__(self, collection: AsyncIOMotorCollection,
+                 save_if: Callable[[dict], bool] = lambda x: True):
+        self.save_if = save_if
+        self.collection = collection
+
     async def extract(self, x: WebTarget):
         html = x.is_html()
         if html is None:
@@ -65,6 +66,21 @@ class MongoExtractor(DysderaExtractor): # extractors that saves crawl informatio
             if self.collection is not None and self.save_if(page):
                 await self.collection.insert_one(page)
 
+class JsonExtractor(DysderaExtractor):
+
+    def __init__(self, file: AiofilesContextManager,
+                 save_if: Callable[[dict], bool] = lambda x: True):
+        self.save_if = save_if
+        self.file = file
+
+    async def extract(self, x: WebTarget):
+        html = x.is_html()
+        if html is None:
+            html = x.lxml_is_html()
+        if html:
+            page = self.page_to_dict(x)
+            if self.file is not None and self.save_if(page):
+                await self.file.write(json.dumps(page) + "\n")
 
 class FileExtractor(DysderaExtractor): # extractors that saves all files with one of the required extension
 
