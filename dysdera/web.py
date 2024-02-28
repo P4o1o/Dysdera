@@ -321,7 +321,7 @@ class WebTarget(WebPage):
     def canonical_url(self) -> Optional[URL]:
         if self.parser is None:
             raise MissingDownloadException(self.url)
-        return self.parser.get_canonical_url()
+        return self.parser.get_canonical_url(self.url)
 
     def extract_titles(self) -> List[str]:
         if self.parser is None:

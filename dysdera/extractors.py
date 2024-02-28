@@ -9,7 +9,6 @@ from dysdera.parser import absolute_timestamp
 from dysdera.web import WebTarget
 from motor.motor_asyncio import AsyncIOMotorCollection
 from aiofiles import open as aio_open
-from aiofiles import AiofilesContextManager
 import json
 
 
@@ -69,7 +68,7 @@ class MongoExtractor(DysderaExtractor): # extractors that saves crawl informatio
 
 class JsonExtractor(DysderaExtractor):
 
-    def __init__(self, file: AiofilesContextManager,
+    def __init__(self, file,
                  save_if: Callable[[dict], bool] = lambda x: True):
         self.save_if = save_if
         self.file = file

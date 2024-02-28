@@ -8,11 +8,14 @@ from dysdera.web import WebTarget, WebMap, WebPage
 from dysdera.parser import URL
 from motor.motor_asyncio import AsyncIOMotorCollection
 
+
 async def unknown_last_modify(url: URL):
     return None
 
+
 async def default_false(x):
     return False
+
 
 async def default_true(x):
     return True
@@ -20,16 +23,17 @@ async def default_true(x):
 
 class Policy:
 
-    def __init__(self, focus_policy: Callable[[WebTarget], Awaitable[bool]] = default_true, # should crawl?  corutine
+    def __init__(self, focus_policy: Callable[[WebTarget], Awaitable[bool]] = default_true,  # should crawl?  corutine
                  sitemap_scheduling_cost: Callable[[Dict[str, Union[str, bool]]], int] = lambda x: 1,
                  scheduling_cost: Callable[[WebTarget], int] = lambda x: 1,
-                 sitemap_selection_policy: Callable[[Dict[str, Union[str, bool]]], bool] = lambda x: True,  # should visit?
-                 selection_policy: Callable[[WebTarget],  Awaitable[bool]] = default_true,  # should visit?  corutine
-                 headers_before_visit: Callable[[WebTarget],  Awaitable[bool]] = default_false,#  corutine
+                 sitemap_selection_policy: Callable[[Dict[str, Union[str, bool]]], bool] = lambda x: True,
+                 # should visit?
+                 selection_policy: Callable[[WebTarget], Awaitable[bool]] = default_true,  # should visit?  corutine
+                 headers_before_visit: Callable[[WebTarget], Awaitable[bool]] = default_false,  # corutine
                  respect_robots=True, agent_name=None, canonical_url=True, default_delay: float = 5,
                  can_dload_without_ssl: Callable[[WebPage], bool] = lambda x: False,
-                 visit_sitemap: Callable[[URL], bool] = lambda x: True, # should visit the sitemaps of this domain?
-                 dload_if_modified_since = unknown_last_modify):
+                 visit_sitemap: Callable[[URL], bool] = lambda x: True,  # should visit the sitemaps of this domain?
+                 dload_if_modified_since=unknown_last_modify):
         """
         params:     focus_policy                corutine(WebTarget) -> bool     shoul I visit the links on the page?
                     selection_policy            corutine(WebTarget) -> bool     should I visit this page?
@@ -60,8 +64,8 @@ class Policy:
 
     async def should_visit(self, link: WebTarget, sitemap: WebMap = None):
         if sitemap is None:
-            return self.selection_policy(link)
-        return self.selection_policy(link) and (await self.sitemap_selection_policy(sitemap[link.url]))
+            return await self.selection_policy(link)
+        return await self.selection_policy(link) and (self.sitemap_selection_policy(sitemap[link.url]))
 
     def queue_weight(self, not_in_map=1):
         return SchedulingCost.combine({self.scheduling_cost: not_in_map})
@@ -82,7 +86,7 @@ class Policy:
             return False
 
 
-class DomainPolicy(Policy): # for all the pages in some required domains
+class DomainPolicy(Policy):  # for all the pages in some required domains
 
     def __init__(self, *domains: str,
                  sitemap_scheduling_cost: Callable[[Dict[str, Union[str, bool]]], int] = lambda x: 1,
@@ -99,7 +103,8 @@ class DomainPolicy(Policy): # for all the pages in some required domains
         return False
 
 
-class ExtendedDomainPolicy(Policy): # for all the pages in some required domains and the pages they poin to (visit all, crawl only if same domain)
+class ExtendedDomainPolicy(
+    Policy):  # for all the pages in some required domains and the pages they poin to (visit all, crawl only if same domain)
 
     def __init__(self, *domains: str,
                  sitemap_scheduling_cost: Callable[[Dict[str, Union[str, bool]]], int] = lambda x: 1,
@@ -116,11 +121,23 @@ class ExtendedDomainPolicy(Policy): # for all the pages in some required domains
         return False
 
 
-class MongoMemoryPolicy(Policy): # visit the page only if was modified since last time, data from a mongodb collection 
+class MongoMemoryPolicy(Policy):  # visit the page only if was modified since last time, data from a mongodb collection
 
-    def __init__(self, collection: AsyncIOMotorCollection, focus_policy: Callable[[WebTarget], Awaitable[bool]] = default_true, sitemap_scheduling_cost: Callable[[Dict[str, str | bool]], int] = lambda x: 1, scheduling_cost: Callable[[WebTarget], int] = lambda x: 1, sitemap_selection_policy: Callable[[Dict[str, str | bool]], bool] = lambda x: True, selection_policy: Callable[[WebTarget], Awaitable[bool]] = default_true, headers_before_visit: Callable[[WebTarget], Awaitable[bool]] = default_false, respect_robots=True, agent_name=None, canonical_url=True, default_delay: float = 5, can_dload_without_ssl: Callable[[WebPage], bool] = lambda x: False, visit_sitemap: Callable[[URL], bool] = lambda x: True, dload_if_modified_since: Callable[[URL], datetime] = lambda x: None):
+    def __init__(self, collection: AsyncIOMotorCollection,
+                 focus_policy: Callable[[WebTarget], Awaitable[bool]] = default_true,
+                 sitemap_scheduling_cost: Callable[[Dict[str, str | bool]], int] = lambda x: 1,
+                 scheduling_cost: Callable[[WebTarget], int] = lambda x: 1,
+                 sitemap_selection_policy: Callable[[Dict[str, str | bool]], bool] = lambda x: True,
+                 selection_policy: Callable[[WebTarget], Awaitable[bool]] = default_true,
+                 headers_before_visit: Callable[[WebTarget], Awaitable[bool]] = default_false, respect_robots=True,
+                 agent_name=None, canonical_url=True, default_delay: float = 5,
+                 can_dload_without_ssl: Callable[[WebPage], bool] = lambda x: False,
+                 visit_sitemap: Callable[[URL], bool] = lambda x: True,
+                 dload_if_modified_since: Callable[[URL], datetime] = lambda x: None):
         self.collection = collection
-        super().__init__(focus_policy, sitemap_scheduling_cost, scheduling_cost, sitemap_selection_policy, selection_policy, headers_before_visit, respect_robots, agent_name, canonical_url, default_delay, can_dload_without_ssl, visit_sitemap, self.was_not_modified)
+        super().__init__(focus_policy, sitemap_scheduling_cost, scheduling_cost, sitemap_selection_policy,
+                         selection_policy, headers_before_visit, respect_robots, agent_name, canonical_url,
+                         default_delay, can_dload_without_ssl, visit_sitemap, self.was_not_modified)
 
     async def was_not_modified(self, page: URL):
         pipeline = [
