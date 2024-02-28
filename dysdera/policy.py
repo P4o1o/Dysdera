@@ -61,7 +61,7 @@ class Policy:
     async def should_visit(self, link: WebTarget, sitemap: WebMap = None):
         if sitemap is None:
             return self.selection_policy(link)
-        return self.selection_policy(link) and (await self.sitemap_selection_policy(sitemap[link.url]))
+        return await self.selection_policy(link) and (self.sitemap_selection_policy(sitemap[link.url]))
 
     def queue_weight(self, not_in_map=1):
         return SchedulingCost.combine({self.scheduling_cost: not_in_map})
