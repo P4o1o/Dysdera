@@ -125,9 +125,9 @@ class MongoMemoryPolicy(Policy):  # visit the page only if was modified since la
 
     def __init__(self, collection: AsyncIOMotorCollection,
                  focus_policy: Callable[[WebTarget], Awaitable[bool]] = default_true,
-                 sitemap_scheduling_cost: Callable[[Dict[str, str | bool]], int] = lambda x: 1,
+                 sitemap_scheduling_cost: Callable[[Dict[str, str or bool]], int] = lambda x: 1,
                  scheduling_cost: Callable[[WebTarget], int] = lambda x: 1,
-                 sitemap_selection_policy: Callable[[Dict[str, str | bool]], bool] = lambda x: True,
+                 sitemap_selection_policy: Callable[[Dict[str, str or bool]], bool] = lambda x: True,
                  selection_policy: Callable[[WebTarget], Awaitable[bool]] = default_true,
                  headers_before_visit: Callable[[WebTarget], Awaitable[bool]] = default_false, respect_robots=True,
                  agent_name=None, canonical_url=True, default_delay: float = 5,

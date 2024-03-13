@@ -248,7 +248,7 @@ class WebSet:
     def reset(self):
         self.items.clear()
 
-    def contains_url(self, url: str | URL) -> bool: # comparison based on urls
+    def contains_url(self, url: str or URL) -> bool: # comparison based on urls
         for elem in self.items:
             if elem.url == url:
                 return True
@@ -299,7 +299,7 @@ class WebTarget(WebPage):
             return self.url()
         return self.head[item]
 
-    def set_text_parser(self, content: str | bytes):
+    def set_text_parser(self, content: str or bytes):
         self.parser = AntParser(content, self.type == 'text')
 
     @property
@@ -494,7 +494,7 @@ class WebMap(WebPage):
         else:
             return []
 
-    def __getitem__(self, item: URL) -> Dict[str, str | bool]: # only if not self.map_of_map
+    def __getitem__(self, item: URL) -> Dict[str, str or bool]: # only if not self.map_of_map
         if self.parser is None:
             raise MissingDownloadException(self.url)
         return self.map[item]

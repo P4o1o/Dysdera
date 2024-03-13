@@ -34,7 +34,7 @@ class DysderaLogger:
             self.logger.addHandler(file_handler)
             self.logger.setLevel(logging.INFO)
 
-    def err_output(self, err: str, routine: str, blame: URL | str = ''):
+    def err_output(self, err: str, routine: str, blame: URL or str = ''):
         """
         params:
             err             error info
@@ -46,7 +46,7 @@ class DysderaLogger:
             print("ERROR " + (val if val != '' else "") + " " + err + f" during {routine}")
         self.logger.error(err, extra={'url': f'{val}', 'routine': f'{routine}'})
 
-    def warn_output(self, warn: str, routine: str, blame: URL | str = ''):
+    def warn_output(self, warn: str, routine: str, blame: URL or str = ''):
         """
         params:
             err             warning info
@@ -58,7 +58,7 @@ class DysderaLogger:
             print("WARING " + (val if val != '' else "") + " " + warn + f" during {routine}")
         self.logger.warning(warn, extra={'url': f'{val}', 'routine': f'{routine}'})
 
-    def info_output(self, info: str, routine: str, at: URL | str = ''):
+    def info_output(self, info: str, routine: str, at: URL or str = ''):
         """
         params:
             info            what happend?

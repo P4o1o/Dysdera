@@ -103,7 +103,7 @@ class DysderaParser:
     class for defining the default parser for a webpage
     """
 
-    def __init__(self, text: str | bytes):
+    def __init__(self, text: str or bytes):
         """
         param:      text    the content of the webpage, as string or as bytes
         """

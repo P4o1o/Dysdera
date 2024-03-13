@@ -17,7 +17,7 @@ from xml.etree.ElementTree import ParseError
 
 class DysderaCrawler:
 
-    def __init__(self, verbose=False, verbose_log=False, max_timeout=10, duplicate_sensibility: int = 0): # if duplicate_sensibility  <= 0 nothing, if duplicate_sensibility == 1 check for identical hashes, if if duplicate_sensibility > 1 simhash with maximum distance if duplicate_sensibility
+    def __init__(self, verbose=False, verbose_log=False, max_timeout=10, duplicate_sensibility: int = 0): # if duplicate_sensibility  <= 0 nothing, if duplicate_sensibility == 1 check for identical hashes, if duplicate_sensibility > 1 simhash with maximum distance if duplicate_sensibility
         self.visited = WebSet()
         self.visited_lock = asyncio.Lock()
         self.robots = RobotsRules()
