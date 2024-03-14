@@ -1,0 +1,141 @@
+policy
+=====================================
+
+This module defines the `policy` class and its subclasses, representing the policy of the web crawler.
+
+.. currentmodule:: dysdera.policy
+
+Classes
+-------
+
+Policy
+^^^^^^
+
+.. autoclass:: Policy
+
+    The `Policy` class defines the behavior of the web crawler. It contains parameters and methods for deciding which pages to visit and crawl.
+    You can implement a custom Policy by defining a subclass of `Policy`.
+
+
+    :param focus_policy: Coroutine function to determine if links on a page should be visited. Default is to visit all links.
+    :type focus_policy: async (:class:`dysdera.web.WebTarget`) to [bool]
+
+    :param sitemap_scheduling_cost: Function to calculate the scheduling cost for pages found in sitemaps. Default is 1.
+    :type sitemap_scheduling_cost: async (:class:`dysdera.web.WebTarget`) to [int]
+
+    :param scheduling_cost: Function to calculate the scheduling cost for individual pages. Default is 1.
+    :type scheduling_cost: async (:class:`dysdera.web.WebTarget`) to [int]
+
+    :param sitemap_selection_policy: Function to determine if sitemap pages should be visited. Default is to visit all sitemap pages.
+    :type sitemap_selection_policy: async (:class:`dysdera.web.WebTarget`) to [bool]
+
+    :param selection_policy: Coroutine function to determine if a page should be visited. Default is to visit all pages.
+    :type selection_policy: async (:class:`dysdera.web.WebTarget`) to [bool]
+
+    :param headers_before_visit: Coroutine function to determine if headers should be fetched before visiting a page. Default is not to fetch headers.
+    :type headers_before_visit: async (:class:`dysdera.web.WebTarget`) to [bool]
+
+    :param respect_robots: Boolean indicating whether to respect robots.txt rules. Default is True.
+    :type respect_robots: bool
+
+    :param agent_name: User agent name for robots.txt. Default is None.
+    :type agent_name: str
+
+    :param default_delay: Default delay to use if not specified in robots.txt. Default is 5.
+    :type default_delay: int
+
+    :param force_without_ssl: Function to determine if pages can be downloaded without SSL. Default is False.
+    :type force_without_ssl: async (:class:`dysdera.web.WebTarget`) to [bool]
+
+    :param dload_if_modified_since: Function to determine if a page should be downloaded based on last modification date. Default is unknown.
+    :type dload_if_modified_since: async (:class:`dysdera.web.WebTarget`) to [bool]
+
+    **Methods:**
+
+        - `should_visit`: Determines if a page should be visited based on the selection policy.
+        - `queue_weight`: Calculates the weight of a page in the queue.
+        - `map_queue_weight`: Calculates the weight of pages in a map queue.
+        - `should_crawl`: Determines if a page should be crawled based on the focus policy.
+
+DomainPolicy
+^^^^^^^^^^^^
+
+.. autoclass:: DomainPolicy
+    :members:
+    :undoc-members:
+
+    The `DomainPolicy` class extends the `Policy` class to define policies for pages within specified domains.
+
+    :param domains: Domains for which the policy should be applied.
+    :type domains: List[str]
+
+    :param sitemap_scheduling_cost: Function to calculate the scheduling cost for pages found in sitemaps. Default is 1.
+    :type sitemap_scheduling_cost: async (:class:`dysdera.web.WebTarget`) to [int]
+
+    :param scheduling_cost: Function to calculate the scheduling cost for individual pages. Default is 1.
+    :type scheduling_cost: async (:class:`dysdera.web.WebTarget`) to [int]
+
+ExtendedDomainPolicy
+^^^^^^^^^^^^^^^^^^^^
+
+.. autoclass:: ExtendedDomainPolicy
+    :members:
+    :undoc-members:
+
+    The `ExtendedDomainPolicy` class extends the `Policy` class to define policies for pages within specified domains and the pages they point to.
+
+    :param domains: Domains for which the policy should be applied.
+    :type domains: List[str]
+
+    :param sitemap_scheduling_cost: Function to calculate the scheduling cost for pages found in sitemaps. Default is 1.
+    :type sitemap_scheduling_cost: async (:class:`dysdera.web.WebTarget`) to [int]
+
+    :param scheduling_cost: Function to calculate the scheduling cost for individual pages. Default is 1.
+    :type scheduling_cost: async (:class:`dysdera.web.WebTarget`) to [int]
+
+MongoMemoryPolicy
+^^^^^^^^^^^^^^^^^
+
+.. autoclass:: MongoMemoryPolicy
+    :members:
+    :undoc-members:
+
+    The `MongoMemoryPolicy` class extends the `Policy` class to define policies for pages based on data from a MongoDB collection.
+
+    :param collection: AsyncIOMotorCollection containing information about visited pages.
+    :type collection: AsyncIOMotorCollection
+
+    :param focus_policy: Coroutine function to determine if links on a page should be visited. Default is to visit all links.
+    :type focus_policy: async (:class:`dysdera.web.WebTarget`) to [bool]
+
+    :param sitemap_scheduling_cost: Function to calculate the scheduling cost for pages found in sitemaps. Default is 1.
+    :type sitemap_scheduling_cost: async (:class:`dysdera.web.WebTarget`) to [int]
+
+    :param scheduling_cost: Function to calculate the scheduling cost for individual pages. Default is 1.
+    :type scheduling_cost: async (:class:`dysdera.web.WebTarget`) to [int]
+
+    :param sitemap_selection_policy: Function to determine if sitemap pages should be visited. Default is to visit all sitemap pages.
+    :type sitemap_selection_policy: async (:class:`dysdera.web.WebTarget`) to [bool]
+
+    :param selection_policy: Coroutine function to determine if a page should be visited. Default is to visit all pages.
+    :type selection_policy: async (:class:`dysdera.web.WebTarget`) to [bool]
+
+    :param headers_before_visit: Coroutine function to determine if headers should be fetched before visiting a page. Default is not to fetch headers.
+    :type headers_before_visit: async (:class:`dysdera.web.WebTarget`) to [bool]
+
+    :param respect_robots: Boolean indicating whether to respect robots.txt rules. Default is True.
+    :type respect_robots: bool
+
+    :param agent_name: User agent name for robots.txt. Default is None.
+    :type agent_name: str or None
+
+    :param default_delay: Default delay to use if not specified in robots.txt. Default is 5.
+    :type default_delay: int
+
+    :param force_without_ssl: Function to determine if pages can be downloaded without SSL. Default is False.
+    :type force_without_ssl: async (:class:`dysdera.web.WebTarget`) to [bool]
+
+    :param dload_if_modified_since: Function to determine if a page should be downloaded based on last modification date. Default is unknown.
+    :type dload_if_modified_since: async (:class:`dysdera.web.WebTarget`) to [bool]
+
+

@@ -1,0 +1,76 @@
+dysderacrawler
+==============
+
+This module contains the class `DysderaCrawler`, where the logic of the web crawler is defined. It is asynchronous, so you should run its methods inside an async function (see Example Usage for more).
+
+.. currentmodule:: dysdera.dysderacrawler
+
+Classes
+-------
+
+DysderaCrawler
+^^^^^^^^^^^^^^
+
+.. autoclass:: DysderaCrawler
+    :members:
+
+    The `DysderaCrawler` class defines the behavior of the web crawler.
+
+    :param verbose: If `True`, the crawler will display its actions on the command line during crawling. (Default: `False`)
+    :type verbose: bool
+    :param verbose_log: If `True`, information about the crawler's actions will also be written to the log file. (Default: `False`)
+    :type verbose_log: bool
+    :param max_timeout: Maximum timeout used when downloading a page. (Default: `10`)
+    :type max_timeout: int
+    :param duplicate_sensibility: Determines how the crawler handles duplicate pages. If `1`, the crawler will ignore pages with the same hash. If greater than `1`, it will ignore pages with the same simhash. (Default: `0`)
+    :type duplicate_sensibility: int
+
+    **Methods:**
+    
+        .. automethod:: DysderaCrawler.start
+
+            :param session: The aiohttp session for the crawl.
+            :type session: :class:`aiohttp.ClientSession`
+            :param policy: The policy the crawler should adopt for this crawl.
+            :type policy: :class:`dysdera.Policy`
+            :param extractor: The type of extractor to use for this crawl, depending on how you want to save the web pages.
+            :type extractor: :class:`dysdera.DysderaExtractor`
+            :param domains: Entry points for the crawl, represented as strings representing valid domains.
+            :type domains: :class:`str`
+
+            This method is called to start the crawl.
+
+        .. automethod:: DysderaCrawler.terminate
+
+            This method is called to terminate the crawl.
+
+Example Usage
+-------------
+Here's an example of how to use the DysderaCrawler module:
+
+
+.. code-block:: python
+
+   import asyncio
+   import aiohttp
+   from motor.motor_asyncio import AsyncIOMotorClient
+   from dysdera.dysderacrawler import DysderaCrawler
+   from dysdera.extractors import MongoExtractor
+   from dysdera.policy import Policy
+
+   async def main(collection):
+       crawler = DysderaCrawler(verbose=True, max_timeout=50)
+       async with aiohttp.ClientSession() as session:
+           await crawler.start(session, Policy(),
+                               MongoExtractor(collection),
+                               'https://www.example.com/',
+                               # more starting domains if you want
+           )
+
+   if __name__ == "__main__":
+       mongo = AsyncIOMotorClient("mongodb://localhost:27017")
+       try:
+           loop = asyncio.new_event_loop()
+           loop.run_until_complete(main(mongo.dysderadb.film))
+       finally:
+           mongo.close() 
