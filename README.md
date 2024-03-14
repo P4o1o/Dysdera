@@ -2,7 +2,8 @@
 ### asynchronous web crawler implementation written in Python
 The Dysdera Web Crawler is a Python-based asynchronous web crawler designed for maximum extensibility and adaptability.
 Engineered to handle the often non-standard nature of the web, it provides fine-grained control over crawling policies.
-This is not a finished project; feel free to collaborate
+
+This is not a finished project, feel free to collaborate
 #
 
 
