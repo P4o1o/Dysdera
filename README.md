@@ -1,6 +1,6 @@
 # Dysdera Web Crawler
-#### this is a simple asynchronous web crawler implementation written in Python
-The Dysdera Web Crawler is a python implementation of an asynchronous web crawler. It's design with the main goal of being estensible and adattable as the web can be "_not so standard_" and of having the most control possible on witch sites will be crawled
+### this is a simple asynchronous web crawler implementation written in Python
+The Dysdera Web Crawler is a python implementation of an asynchronous web crawler. It's design with the main goal of being estensible and adattable as the web can be "_not so standard_" and of having the most control possible on the policy of the crawl
 #
 
 
