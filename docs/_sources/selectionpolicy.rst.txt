@@ -1,0 +1,122 @@
+selectionpolicy
+===================================================
+
+.. currentmodule:: dysdera.selectionpolicy
+
+In this file, there are selection policies and functions to calculate the cost of visiting a page that could be helpful.
+the functions are contained in different classes for order, if you want a custom and more intelligent selection policy or scheduling function you can implemet one as a class, but it need to implement the async method ``__call__(x: WebTarget) -> bool`` like :class:`AgedSelectionPolicy`
+
+
+Classes
+------------------
+
+AgedSelectionPolicy
+^^^^^^^^^^^^^^^^^^^
+
+.. autoclass:: AgedSelectionPolicy
+    :members:
+
+    This class implements a selection policy based on the age of the page, calculated from a previous database of crawls.
+
+    :param collection: MongoDB collection containing crawl data.
+    :type collection: MongoDB collection
+
+    :param max_age: Maximum age of the page in days (default is 20).
+    :type max_age: int
+
+    :param not_present: Return value if the page is not present in the database (default is False).
+    :type not_present: bool
+
+    - **Methods:**
+        - `__call__`: Asynchronously determines if the page should be visited based on its age.
+
+
+SelectionPolicy
+^^^^^^^^^^^^^^^
+
+.. autoclass:: SelectionPolicy
+    :members:
+
+    Contains static methods to create various selection policies based on different criteria.
+
+    - **Static Methods:**
+        - `must_contain`: Returns a policy that checks if the URL contains a specific word.
+        - `same_domain`: Returns a policy that checks if the URL belongs to the same domain as a given URL.
+        - `not_true`: Returns a policy that negates the given policy.
+        - `all_true`: Returns a policy that checks if all given policies are true.
+        - `at_least_one_true`: Returns a policy that checks if at least one of the given policies is true.
+
+SelectionPolicyWithHeaders
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autoclass:: SelectionPolicyWithHeaders
+    :members:
+    
+    Contains static methods to create selection policies based on header information.
+
+    - **Static Methods:**
+        - `modify_only_before`: Returns a policy that checks if the last modified date is before a given date.
+        - `modify_only_after`: Returns a policy that checks if the last modified date is after a given date.
+        - `modify_between`: Returns a policy that checks if the last modified date is between two given dates.
+        - `is_html`: Returns a policy that checks if the page is HTML.
+
+SitemapSelectionPolicy
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. autoclass:: SitemapSelectionPolicy
+    :members:
+    
+    Contains static methods to create selection policies for sitemap information.
+
+    - **Static Methods:**
+        - `not_true`: Returns a policy that negates the given policy.
+        - `all_true`: Returns a policy that checks if all given policies are true.
+        - `at_least_one_true`: Returns a policy that checks if at least one of the given policies is true.
+        - `modify_only_before`: Returns a policy that checks if the last modified date in sitemap is before a given date.
+        - `modify_only_after`: Returns a policy that checks if the last modified date in sitemap is after a given date.
+        - `modify_between`: Returns a policy that checks if the last modified date in sitemap is between two given dates.
+        - `is_news`: Returns a policy that checks if the page is a news item.
+        - `news_contains`: Returns a policy that checks if the news title, name, or keywords contain a specific word.
+
+SchedulingCost
+^^^^^^^^^^^^^^^
+
+.. autoclass:: SchedulingCost
+    :members:
+    
+    Contains methods to calculate the cost of visiting a page based on different criteria.
+
+    - **Static Methods:**
+        - `fifo`: Returns a policy that assigns a cost of 1 for a breadth-first search.
+        - `lifo`: Returns a policy that assigns a cost of -1 for a depth-first search.
+        - `from_selection_policy`: Returns a policy based on a selection policy.
+        - `url_contains`: Returns a policy that assigns a cost if the URL contains a specific word.
+        - `combine`: Returns a policy that combines multiple policies.
+        - `multiply`: Returns a policy that multiplies the costs of two policies.
+
+SchedulingCostWithHeader
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. autoclass:: SchedulingCostWithHeader
+    :members:
+    
+    Contains methods to calculate the cost of visiting a page based on header information.
+
+    - **Static Methods:**
+        - `latest_modify`: Returns a policy that assigns a cost based on the latest modified date.
+
+SitemapSchedulingCost
+^^^^^^^^^^^^^^^^^^^^^
+
+.. autoclass:: SitemapSchedulingCost
+    :members:
+    
+    Contains methods to calculate the cost of visiting a page based on sitemap information.
+
+    - **Static Methods:**
+        - `combine``: Returns a policy that combines multiple policies.
+        - `from_selection_policy`: Returns a policy based on a selection policy.
+        - `latest_modify`: Returns a policy that assigns a cost based on the latest modified date in sitemap.
+
+Note: Ensure that you have appropriate imports and configurations for the classes and methods mentioned in this documentation.
