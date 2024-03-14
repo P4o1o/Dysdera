@@ -26,6 +26,11 @@ You will find the documentation [here](https://p4o1o.github.io/Dysdera/dysderacr
 #
 
 
+### Disclamer
+This is not an end project. If you have something to add, do it!
+
+#
+
 
 ### files structure:
 
