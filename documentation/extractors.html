@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>extractors &mdash; Dysdera Web Crawler  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="policy" href="policy.html" />
+    <link rel="prev" title="dysderacrawler" href="dysderacrawler.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dysdera Web Crawler
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dysderacrawler.html">dysderacrawler</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">extractors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#classes">Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dysdera-extractor">Dysdera Extractor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dysdera.extractors.DysderaExtractor"><code class="docutils literal notranslate"><span class="pre">DysderaExtractor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mongo-extractor">Mongo Extractor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dysdera.extractors.MongoExtractor"><code class="docutils literal notranslate"><span class="pre">MongoExtractor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#json-extractor">Json Extractor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dysdera.extractors.JsonExtractor"><code class="docutils literal notranslate"><span class="pre">JsonExtractor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#file-extractor">File Extractor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dysdera.extractors.FileExtractor"><code class="docutils literal notranslate"><span class="pre">FileExtractor</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="policy.html">policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="selectionpolicy.html">selectionpolicy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web.html">web</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dysdera Web Crawler</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">extractors</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/extractors.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="extractors">
+<h1>extractors<a class="headerlink" href="#extractors" title="Link to this heading"></a></h1>
+<p>This module contains some class for the extraction logic.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<section id="dysdera-extractor">
+<h3>Dysdera Extractor<a class="headerlink" href="#dysdera-extractor" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="dysdera.extractors.DysderaExtractor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dysdera.extractors.</span></span><span class="sig-name descname"><span class="pre">DysderaExtractor</span></span><a class="reference internal" href="_modules/dysdera/extractors.html#DysderaExtractor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dysdera.extractors.DysderaExtractor" title="Link to this definition"></a></dt>
+<dd><p>abstract class for the informarion extractor</p>
+<p>Abstract class for the information extractor.</p>
+<p>If you want to create a custom extractor, your extractor must be a subclass of
+<a class="reference internal" href="#dysdera.extractors.DysderaExtractor" title="dysdera.extractors.DysderaExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">DysderaExtractor</span></code></a> and implement the method <a class="reference internal" href="#dysdera.extractors.DysderaExtractor.extract" title="dysdera.extractors.DysderaExtractor.extract"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract()</span></code></a>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dysdera.extractors.DysderaExtractor.extract">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="web.html#dysdera.web.WebTarget" title="dysdera.web.WebTarget"><span class="pre">WebTarget</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dysdera/extractors.html#DysderaExtractor.extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dysdera.extractors.DysderaExtractor.extract" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference internal" href="web.html#dysdera.web.WebTarget" title="dysdera.web.WebTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">dysdera.web.WebTarget</span></code></a>) – Web target to be extracted.</p>
+</dd>
+</dl>
+<p>This method should be implemented by subclasses to define the logic for extracting information from a web target.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dysdera.extractors.DysderaExtractor.page_to_dict">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">page_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="web.html#dysdera.web.WebTarget" title="dysdera.web.WebTarget"><span class="pre">WebTarget</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/dysdera/extractors.html#DysderaExtractor.page_to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dysdera.extractors.DysderaExtractor.page_to_dict" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference internal" href="web.html#dysdera.web.WebTarget" title="dysdera.web.WebTarget"><code class="xref py py-class docutils literal notranslate"><span class="pre">dysdera.web.WebTarget</span></code></a>) – Web target to be transformed into a dictionary.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary containing information extracted from the web target.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+<p>Transform a <cite>WebTarget</cite> into a dictionary and returns it. The dictionary contains the following keys:</p>
+<ul class="simple">
+<li><p><cite>url</cite>: URL of the web target.</p></li>
+<li><p><cite>domain</cite>: Domain of the URL.</p></li>
+<li><p><cite>name</cite>: Page title extracted from the web target.</p></li>
+<li><p><cite>titles</cite>: Concatenated titles extracted from the web target.</p></li>
+<li><p><cite>text</cite>: Concatenated text content extracted from the web target.</p></li>
+<li><p><cite>figcapt</cite>: Concatenated figure captions extracted from the web target.</p></li>
+<li><p><cite>links</cite>: List of URLs extracted from the web target.</p></li>
+<li><p><cite>canonical_url</cite>: Canonical URL extracted from the web target.</p></li>
+<li><p><cite>meta</cite>: Metadata extracted from the web target.</p></li>
+<li><p><cite>visited</cite>: Date and time when the web target was visited.</p></li>
+<li><p><cite>lastmod</cite>: Date and time of the last modification of the web target.</p></li>
+<li><p><cite>timestamp_UTC</cite>: UTC timestamp of the last modification of the web target, if available.</p></li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="mongo-extractor">
+<h3>Mongo Extractor<a class="headerlink" href="#mongo-extractor" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="dysdera.extractors.MongoExtractor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dysdera.extractors.</span></span><span class="sig-name descname"><span class="pre">MongoExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">collection:</span> <span class="pre">motor.motor_asyncio.AsyncIOMotorCollection,</span> <span class="pre">save_if:</span> <span class="pre">~typing.Callable[[dict],</span> <span class="pre">bool]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">MongoExtractor.&lt;lambda&gt;&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dysdera/extractors.html#MongoExtractor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dysdera.extractors.MongoExtractor" title="Link to this definition"></a></dt>
+<dd><p>Extractor that saves crawl information in a MongoDB collection as a dict, see <a class="reference internal" href="#dysdera.extractors.DysderaExtractor.page_to_dict" title="dysdera.extractors.DysderaExtractor.page_to_dict"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DysderaExtractor.page_to_dict()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">motor.motor_asyncio.AsyncIOMotorCollection</span></code>) – AsyncIOMotorCollection to save crawl information.</p></li>
+<li><p><strong>save_if</strong> (<em>Callable</em><em>[</em><em>[</em><em>dict</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – Function to filter pages to be saved (default is to save all).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="json-extractor">
+<h3>Json Extractor<a class="headerlink" href="#json-extractor" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="dysdera.extractors.JsonExtractor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dysdera.extractors.</span></span><span class="sig-name descname"><span class="pre">JsonExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">file,</span> <span class="pre">save_if:</span> <span class="pre">~typing.Callable[[dict],</span> <span class="pre">bool]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">JsonExtractor.&lt;lambda&gt;&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dysdera/extractors.html#JsonExtractor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dysdera.extractors.JsonExtractor" title="Link to this definition"></a></dt>
+<dd><p>Extractor that saves crawl information in a JSON file as a dict, see <a class="reference internal" href="#dysdera.extractors.DysderaExtractor.page_to_dict" title="dysdera.extractors.DysderaExtractor.page_to_dict"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DysderaExtractor.page_to_dict()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>file-like object</em>) – File to save crawl information.</p></li>
+<li><p><strong>save_if</strong> (<em>Callable</em><em>[</em><em>[</em><em>dict</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – Function to filter pages to be saved (default is to save all).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="file-extractor">
+<h3>File Extractor<a class="headerlink" href="#file-extractor" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="dysdera.extractors.FileExtractor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dysdera.extractors.</span></span><span class="sig-name descname"><span class="pre">FileExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dysdera/extractors.html#FileExtractor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dysdera.extractors.FileExtractor" title="Link to this definition"></a></dt>
+<dd><p>Extractor that save all files with one of the required extensions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>extension</strong> (<em>str</em>) – Required file extensions.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em>) – Output directory to save files (default is current directory).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dysderacrawler.html" class="btn btn-neutral float-left" title="dysderacrawler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="policy.html" class="btn btn-neutral float-right" title="policy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Paolo Checchin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
