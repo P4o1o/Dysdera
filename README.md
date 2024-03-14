@@ -21,7 +21,7 @@ The Dysdera Web Crawler is a python implementation of an asynchronous web crawle
 
 
 ### How to use it?
-You will find the documentation [here](https://p4o1o.github.io/Dysdera/dysderacrawler.html)
+You will find the documentation [here as an html page](https://p4o1o.github.io/Dysdera/dysderacrawler.html) or [here as a github page](https://github.com/P4o1o/Dysdera/tree/main/docs/_sources)
 
 #
 
