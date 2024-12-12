@@ -19,7 +19,7 @@ This is not a finished project, feel free to collaborate
       - **lxml** for the html parsing,
       - **brotli** for http response compression,
       - **pytz** and **python-dateutil** for more precise datetime management,
-      - **chardet** for encodin detection
+      - **chardet** for encoding detection
 #
 
 
