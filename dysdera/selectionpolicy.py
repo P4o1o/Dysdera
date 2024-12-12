@@ -71,6 +71,16 @@ class AgedSelectionPolicy:
             finally:
                 return self.not_present
 
+class FocusPolicy:
+
+    @staticmethod
+    async def row_must_contain(word: str) -> Callable[[WebTarget], Awaitable[bool]]:
+        async def final_policy(target: WebTarget) -> bool:
+            if(target.type == "text")
+                return word.lower() in target.
+            return False
+        return final_policy
+
 class SelectionPolicy:
 
     @staticmethod
